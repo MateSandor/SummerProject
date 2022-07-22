@@ -31,7 +31,7 @@ public class EditablePanel extends JPanel {
 	private JLabel lblTexEast;
 	private JLabel lblTexSouth;
 	private JLabel lblTexWest;
-	private String[] directions = { "�szak", "Kelet", "D�l", "Nyugat" };
+	private String[] directions = { "Észak", "Kelet", "Dél", "Nyugat" };
 	private JComboBox directionList;
 	
 	

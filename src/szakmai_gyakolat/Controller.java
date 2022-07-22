@@ -112,7 +112,7 @@ public class Controller {
 	    Graphics2D g = returnImage.createGraphics();
 	    g.translate((neww - w) / 2, (newh - h) / 2);
 	    g.rotate(angle, w / 2, h / 2);
-	    g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR); //arra szolg�l, hogy ne legyen elmosott a sz�veg
+	    g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR); //arra szolgál, hogy ne legyen elmosott a szöveg
 	    g.drawRenderedImage(inputImage, null);
 	    g.dispose();
 	    return returnImage;
@@ -332,12 +332,12 @@ public class Controller {
 					com.itextpdf.text.Image[] fronts2 = bufferedArrayToImage(bufferedFronts2);
 				
 					if ((isFileExists || isFileExists2) && returnVal == JFileChooser.APPROVE_OPTION && file != null) {
-						chosen = JOptionPane.showConfirmDialog(EditableFrame.getMyEditableFrame(), "Ilyen nev� f�jl m�r l�teszik. Szeretn�d fel�l�rni?","Figyelem!", JOptionPane.YES_NO_OPTION);
+						chosen = JOptionPane.showConfirmDialog(EditableFrame.getMyEditableFrame(), "Ilyen nevű fájl már létezik. Szeretnéd felűlírni?","Figyelem!", JOptionPane.YES_NO_OPTION);
 						if (chosen == JOptionPane.YES_OPTION) {
 							fc.approveSelection();
 							FileManager.writePdfPress(fronts1, file + "_szerk._nyomda");
 							FileManager.writePdfPress(fronts2, file + "_szerk2._nyomda");
-							JOptionPane.showMessageDialog(EditableFrame.getMyEditableFrame(), "Sikeres ment�s!", "Ut�irat", 1);
+							JOptionPane.showMessageDialog(EditableFrame.getMyEditableFrame(), "Sikeres mentés!", "Utóirat", 1);
 						}
 					}
 					else if (returnVal == JFileChooser.CANCEL_OPTION) {
@@ -346,7 +346,7 @@ public class Controller {
 					else if (file != null) {
 						FileManager.writePdfPress(fronts1, file + "_szerk._nyomda");
 						FileManager.writePdfPress(fronts2, file + "_szerk2._nyomda");
-						JOptionPane.showMessageDialog(EditableFrame.getMyEditableFrame(), "Sikeres ment�s!", "Ut�irat", 1);
+						JOptionPane.showMessageDialog(EditableFrame.getMyEditableFrame(), "Sikeres mentés!", "Utóirat", 1);
 					}
 					
 				}
@@ -390,7 +390,7 @@ public class Controller {
 					BufferedImage[] bufferedTreasures = createAndFillSelectedBlues();
 
 					if (isFileExists && returnVal == JFileChooser.APPROVE_OPTION && file != null){
-						chosen = JOptionPane.showConfirmDialog(EditableFrame.getMyEditableFrame(), "Ilyen nev� f�jl m�r l�teszik. Szeretn�d fel�l�rni?","Figyelem!", JOptionPane.YES_NO_OPTION);
+						chosen = JOptionPane.showConfirmDialog(EditableFrame.getMyEditableFrame(), "Ilyen nevű fájl már léteszik. Szeretnéd felülírni?","Figyelem!", JOptionPane.YES_NO_OPTION);
 						if (chosen == JOptionPane.YES_OPTION) {
 							fc.approveSelection();
 							numberOfFile = 0;
@@ -404,7 +404,7 @@ public class Controller {
 								FileManager.writePdfPress(treasures, file + "_szerencseproba_nyomda");
 								numberOfFile++;
 							}
-							JOptionPane.showMessageDialog(EditableFrame.getMyEditableFrame(), "Sikeres ment�s!\n L�trehozott f�jl(ok) sz�ma: " + numberOfFile, "Ut�irat", 1);
+							JOptionPane.showMessageDialog(EditableFrame.getMyEditableFrame(), "Sikeres mentés!\n Létrehozott fájl(ok) száma: " + numberOfFile, "Utóirat", 1);
 						}
 					}
 					else if (returnVal == JFileChooser.CANCEL_OPTION) {
@@ -422,7 +422,7 @@ public class Controller {
 							FileManager.writePdfPress(treasures, file + "_szerencseproba_nyomda");
 							numberOfFile++;
 						}
-						JOptionPane.showMessageDialog(EditableFrame.getMyEditableFrame(), "Sikeres ment�s!\n L�trehozott f�jl(ok) sz�ma: " + numberOfFile, "Ut�irat", 1);
+						JOptionPane.showMessageDialog(EditableFrame.getMyEditableFrame(), "Sikeres mentés!\n Létrehozott fájl(ok) száma: " + numberOfFile, "Utóirat", 1);
 					}
 				}
 			}
@@ -544,7 +544,7 @@ public class Controller {
 	 */
 	public static boolean if_notSelectedEditablePanel_and_clickSave(EditablePanel[] panels) {
 		if (countCheckedEditables(panels) == 0) {
-			JOptionPane.showMessageDialog(NoneditableFrame.getMyNoneditableFrame(), "Nincs kijel�lt lap.", "Figyelem!", 1);
+			JOptionPane.showMessageDialog(NoneditableFrame.getMyNoneditableFrame(), "Nincs kijelölt lap.", "Figyelem!", 1);
 			return true;
 		}
 		return false;
@@ -557,7 +557,7 @@ public class Controller {
 	 */
 	public static boolean if_notSelectedNoneditablePanel_and_clickSave(NoneditablePanel[] panels) {
 		if (countCheckedNoneditables(panels) == 0) {
-			JOptionPane.showMessageDialog(NoneditableFrame.getMyNoneditableFrame(), "Nincs kijel�lt lap.", "Figyelem!", 1);
+			JOptionPane.showMessageDialog(NoneditableFrame.getMyNoneditableFrame(), "Nincs kijelölt lap.", "Figyelem!", 1);
 			return true;
 		}
 		return false;
@@ -570,7 +570,7 @@ public class Controller {
 	 */
 	public static boolean if_selectedNoneditablePanel_with_0sum_and_clickSave(NoneditablePanel[] panels) {
 		if (NoneditableFrame.getSumAll() == 0) {
-			JOptionPane.showMessageDialog(NoneditableFrame.getMyNoneditableFrame(), "�sszes mennyis�g = 0.", "Figyelem!", 1);
+			JOptionPane.showMessageDialog(NoneditableFrame.getMyNoneditableFrame(), "Összes mennyiség = 0", "Figyelem!", 1);
 			return true;
 		}
 		return false;

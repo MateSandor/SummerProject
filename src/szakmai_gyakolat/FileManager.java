@@ -80,7 +80,7 @@ public class FileManager {
 				}
 			}
 			document.close();
-			JOptionPane.showMessageDialog(null, "Sikeres ment�s!", "Ut�irat", 1);
+			JOptionPane.showMessageDialog(null, "Sikeres mentés!", "Utóirat", 1);
 		} catch (BadElementException bee) { 
 			bee.getMessage(); 
 		}

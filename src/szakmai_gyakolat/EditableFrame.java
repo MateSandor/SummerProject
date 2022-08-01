@@ -56,10 +56,10 @@ public class EditableFrame extends JFrame {
 	
 	private static final int numberOfEditablePanel = 120;
 	private BufferedImage buttonsBg;
-	private static JButton btnHelp;
+	private static JButton buttonHelp;
 	private EditablePanel[] editablePanels;
 	//private JRadioButton jrbA4;
-	private JRadioButton jrbPress;
+	private JRadioButton jrbPrint;
 	
 	public EditableFrame() {
 		
@@ -114,30 +114,28 @@ public class EditableFrame extends JFrame {
 		btnSavePathFront.setPreferredSize(new Dimension(160, 33));
 		menuPanel.add(btnSavePathFront);
 		
-		//Button panel for 2 JRadioButtons
+		/* Removing jrb completely
+		
+		//JRadio Panel
 		JButton jrbBtn =  new JButton("" ,new ImageIcon(Picture.getPictures().getBtnBg()));
 		jrbBtn.setPreferredSize(new Dimension(100, 33));
 		jrbBtn.setLayout(null);
 		jrbBtn.setOpaque(false);
 		menuPanel.add(jrbBtn);
 		
-		//2. JRadioButton
-		jrbPress = new JRadioButton("Nyomda");
-		jrbPress.setFont(StartFrame.getBtnFont());
-		jrbPress.setForeground(Color.WHITE);
-		jrbPress.setBounds(0, 6, 100, 20);
-		jrbPress.setOpaque(false);
-		jrbBtn.add(jrbPress);
-		
-		//Button group of JRadioButtons
-		ButtonGroup bGroup = new ButtonGroup();
-		//bGroup.add(jrbA4);
-		bGroup.add(jrbPress);
+		//JRadioButton
+		jrbPrint = new JRadioButton("Nyomda");
+		jrbPrint.setFont(StartFrame.getBtnFont());
+		jrbPrint.setForeground(Color.WHITE);
+		jrbPrint.setBounds(0, 6, 100, 20);
+		jrbPrint.setOpaque(false);
+		jrbBtn.add(jrbPrint);
+		 */
 		
 		//Help button
-		btnHelp = new JButton("Segítség!", new ImageIcon(Picture.getPictures().getBtnBg()));
-		btnHelp.setOpaque(false);
-		btnHelp.addActionListener(new ActionListener() {
+		buttonHelp = new JButton("Segítség!", new ImageIcon(Picture.getPictures().getBtnBg()));
+		buttonHelp.setOpaque(false);
+		buttonHelp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (HelpDialog.isHelpDialogCreated() == false) {
 					HelpDialog.setHelpDialog(new HelpDialog());
@@ -149,12 +147,12 @@ public class EditableFrame extends JFrame {
 				}
 			}
 		});
-		btnHelp.setForeground(Color.WHITE);
-		btnHelp.setFont(StartFrame.getBtnFont());
-		btnHelp.setHorizontalTextPosition(JButton.CENTER);
-		btnHelp.setVerticalTextPosition(JButton.CENTER);
-		btnHelp.setPreferredSize(new Dimension(140, 33));
-		menuPanel.add(btnHelp);
+		buttonHelp.setForeground(Color.WHITE);
+		buttonHelp.setFont(StartFrame.getBtnFont());
+		buttonHelp.setHorizontalTextPosition(JButton.CENTER);
+		buttonHelp.setVerticalTextPosition(JButton.CENTER);
+		buttonHelp.setPreferredSize(new Dimension(140, 33));
+		menuPanel.add(buttonHelp);
 		
 		//Path cards label on bigPanel
 		JLabel lblPaths = new JLabel("Lapok szerkesztése");
@@ -231,7 +229,7 @@ public class EditableFrame extends JFrame {
 	}
 	
 	public static JButton getBtnHelp() {
-		return btnHelp;
+		return buttonHelp;
 	}
 	
 	public static EditableFrame getMyEditableFrame() {
@@ -247,7 +245,7 @@ public class EditableFrame extends JFrame {
 	}
 	
 	public JRadioButton getJrbPress() {
-		return jrbPress;
+		return jrbPrint;
 	}
 	
 }

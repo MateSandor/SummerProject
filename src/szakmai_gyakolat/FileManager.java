@@ -97,7 +97,7 @@ public class FileManager {
 	 * @param cards
 	 * @param fileName
 	 */
-	public static void writePdfPress (Image[] cards,  String fileName) {
+	public static void writePdfPrint (Image[] cards,  String fileName) {
 		
 		Document document = new Document();
 		document.setPageSize(new com.itextpdf.text.Rectangle(227,353));

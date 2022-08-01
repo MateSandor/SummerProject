@@ -24,7 +24,7 @@ public class InformDialog extends JDialog {
 
 	public InformDialog() {
 		
-		super(StartFrame.getMyStartFrame(), "T�j�koztat�", ModalityType.APPLICATION_MODAL);
+		super(StartFrame.getMyStartFrame(), "Tájékoztató", ModalityType.APPLICATION_MODAL);
 		
 		setSize(560,490);
 		getContentPane().setLayout(new BorderLayout());

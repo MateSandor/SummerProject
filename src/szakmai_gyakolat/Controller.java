@@ -1,62 +1,32 @@
 package szakmai_gyakolat;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
-import java.awt.Image;
-import java.awt.Panel;
 import java.awt.RenderingHints;
 import java.awt.Transparency;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.ParseException;
-import java.util.FormatFlagsConversionMismatchException;
 
-import javax.imageio.ImageIO;
-import javax.script.ScriptContext;
-import javax.swing.AbstractButton;
-import javax.swing.BorderFactory;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import org.scilab.forge.jlatexmath.LaTeXAtom;
 import org.scilab.forge.jlatexmath.TeXConstants;
 import org.scilab.forge.jlatexmath.TeXFormula;
 import org.scilab.forge.jlatexmath.TeXIcon;
-import org.scilab.forge.jlatexmath.cache.JLaTeXMathCache;
 
 import com.itextpdf.text.BadElementException;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.PageSize;
-import com.itextpdf.text.pdf.PdfWriter;
-
-import szakmai_gyakolat.NoneditablePanel;
 
 public class Controller {
 	public Controller() {}
@@ -73,7 +43,7 @@ public class Controller {
 	 * @return BufferedImage
 	 */
 	public static BufferedImage texToImg(String input) {
-		input = "\\textcolor{black}\\textbf{$$" + "\\lim_{n\\to\\infty}" + input +"$$}";
+		input = "\\textcolor{black}\\textbf{$$"+ input +"$$}";
 		TeXFormula formula = null;
 		try {
 			formula = new TeXFormula(input);
@@ -319,7 +289,9 @@ public class Controller {
 					return;
 				}
 				
-				else if (EditableFrame.getMyEditableFrame().getJrbPress().isSelected()){
+				//else if (EditableFrame.getMyEditableFrame().getJrbPress().isSelected()){
+				else {
+				
 					fc.setFileFilter(new FileNameExtensionFilter("PDF (*.pdf)", "pdf")); 	
 					returnVal = fc.showSaveDialog(EditableFrame.getMyEditableFrame());
 					file = fc.getSelectedFile();
@@ -335,8 +307,8 @@ public class Controller {
 						chosen = JOptionPane.showConfirmDialog(EditableFrame.getMyEditableFrame(), "Ilyen nevű fájl már létezik. Szeretnéd felűlírni?","Figyelem!", JOptionPane.YES_NO_OPTION);
 						if (chosen == JOptionPane.YES_OPTION) {
 							fc.approveSelection();
-							FileManager.writePdfPress(fronts1, file + "_szerk._nyomda");
-							FileManager.writePdfPress(fronts2, file + "_szerk2._nyomda");
+							FileManager.writePdfPrint(fronts1, file + "_szerk._nyomda");
+							FileManager.writePdfPrint(fronts2, file + "_szerk2._nyomda");
 							JOptionPane.showMessageDialog(EditableFrame.getMyEditableFrame(), "Sikeres mentés!", "Utóirat", 1);
 						}
 					}
@@ -344,8 +316,8 @@ public class Controller {
 						return;
 					}
 					else if (file != null) {
-						FileManager.writePdfPress(fronts1, file + "_szerk._nyomda");
-						FileManager.writePdfPress(fronts2, file + "_szerk2._nyomda");
+						FileManager.writePdfPrint(fronts1, file + "_szerk._nyomda");
+						FileManager.writePdfPrint(fronts2, file + "_szerk2._nyomda");
 						JOptionPane.showMessageDialog(EditableFrame.getMyEditableFrame(), "Sikeres mentés!", "Utóirat", 1);
 					}
 					
@@ -370,17 +342,18 @@ public class Controller {
 				File file;
 
 				setSumOfNoneditables(panels);
-				
+				//there is no selected panels
 				if (if_notSelectedNoneditablePanel_and_clickSave(panels)) {
 					return;
 				}
-				
+				//One of the selected panels is selected but the number of cards are 0
 				else if (if_selectedNoneditablePanel_with_0sum_and_clickSave(panels)) {
 					return;
 				}
 				
-				
-				else if (NoneditableFrame.getMyNoneditableFrame().getJrbPress().isSelected()) {
+				// removing jrbPress dependencies
+//				else if (NoneditableFrame.getMyNoneditableFrame().getJrbPress().isSelected()) {
+				else {
 					fc.setFileFilter(new FileNameExtensionFilter("PDF (*.pdf)", "pdf")); 	
 					returnVal = fc.showSaveDialog(NoneditableFrame.getMyNoneditableFrame());
 					file = fc.getSelectedFile();
@@ -388,20 +361,20 @@ public class Controller {
 					
 					BufferedImage[] bufferedActions = createAndFillSelectedActions();
 					BufferedImage[] bufferedTreasures = createAndFillSelectedBlues();
-
+					//already existing name of a file YES/NO option of replacing
 					if (isFileExists && returnVal == JFileChooser.APPROVE_OPTION && file != null){
 						chosen = JOptionPane.showConfirmDialog(EditableFrame.getMyEditableFrame(), "Ilyen nevű fájl már léteszik. Szeretnéd felülírni?","Figyelem!", JOptionPane.YES_NO_OPTION);
 						if (chosen == JOptionPane.YES_OPTION) {
-							fc.approveSelection();
+							fc.approveSelection(); //Accept replacement
 							numberOfFile = 0;
-							if (NoneditableFrame.getSumAction() > 0) {
+							if (NoneditableFrame.getSumAction() > 0) { //action prints
 								com.itextpdf.text.Image[] actions = bufferedArrayToImage(bufferedActions); 
-								FileManager.writePdfPress(actions, file + "_akcio_nyomda");
+								FileManager.writePdfPrint(actions, file + "_akcio_nyomda");
 								numberOfFile++;
 							}
-							if (NoneditableFrame.getSumBlue() > 0) {
+							if (NoneditableFrame.getSumBlue() > 0) { //challenge prints
 								com.itextpdf.text.Image[] treasures = bufferedArrayToImage(bufferedTreasures); 
-								FileManager.writePdfPress(treasures, file + "_szerencseproba_nyomda");
+								FileManager.writePdfPrint(treasures, file + "_szerencseproba_nyomda");
 								numberOfFile++;
 							}
 							JOptionPane.showMessageDialog(EditableFrame.getMyEditableFrame(), "Sikeres mentés!\n Létrehozott fájl(ok) száma: " + numberOfFile, "Utóirat", 1);
@@ -414,12 +387,12 @@ public class Controller {
 						numberOfFile = 0;
 						if (NoneditableFrame.getSumAction() > 0) {
 							com.itextpdf.text.Image[] actions = bufferedArrayToImage(bufferedActions); 
-							FileManager.writePdfPress(actions, file + "_akcio_nyomda");
+							FileManager.writePdfPrint(actions, file + "_akcio_nyomda");
 							numberOfFile++;
 						}
 						if (NoneditableFrame.getSumBlue() > 0) {
 							com.itextpdf.text.Image[] treasures = bufferedArrayToImage(bufferedTreasures); 
-							FileManager.writePdfPress(treasures, file + "_szerencseproba_nyomda");
+							FileManager.writePdfPrint(treasures, file + "_szerencseproba_nyomda");
 							numberOfFile++;
 						}
 						JOptionPane.showMessageDialog(EditableFrame.getMyEditableFrame(), "Sikeres mentés!\n Létrehozott fájl(ok) száma: " + numberOfFile, "Utóirat", 1);

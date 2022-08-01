@@ -21,7 +21,7 @@ public class NoneditablePanel extends JPanel {
 	public NoneditablePanel(int inputMaxElement) {
 		
 		maxElement = new Integer[inputMaxElement + 1];
-		for(int i = 0; i < maxElement.length; i++) {
+		for(int i = 0; i <maxElement.length; i++) {
 			maxElement[i] = i;
 		}
 		
@@ -36,7 +36,7 @@ public class NoneditablePanel extends JPanel {
 		lblImage.setVisible(true);
 		this.add(lblImage);
 		
-		//JCeckBox for selection
+		//JCheckBox for selection
 		chkBox = new JCheckBox("");
 		chkBox.setBounds(-4,-1,17,14);;
 		chkBox.setVisible(true);

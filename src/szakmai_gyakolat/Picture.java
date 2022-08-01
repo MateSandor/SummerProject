@@ -40,7 +40,7 @@ public class Picture {
 			
 			btnBg = ImageIO.read(getClass().getClassLoader().getResource("startPanelButtons.jpg"));
 			editorBg = ImageIO.read(getClass().getClassLoader().getResource("oldRotated.jpg"));
-			startBg = ImageIO.read(getClass().getClassLoader().getResource("startPanel.jpg"));
+			startBg = ImageIO.read(getClass().getClassLoader().getResource("New_background.png"));
 			headBg = ImageIO.read(getClass().getClassLoader().getResource("head.jpg"));
 			help = ImageIO.read(getClass().getClassLoader().getResource("help.jpg"));
 

@@ -24,7 +24,7 @@ public class NoneditableFrame extends JFrame {
 
 	private static NoneditableFrame myNoEditFrame;
 	private JRadioButton jrbA4;
-	private JRadioButton jrbPress;
+	private JRadioButton jrbPrint;
 	
 	private static int clover = 0;
 	private static int arrowDown = 0;
@@ -45,7 +45,7 @@ public class NoneditableFrame extends JFrame {
 		
 		setPreferredSize(new Dimension(1020, 574));
 		setMinimumSize(new Dimension(300, 450));
-		setTitle("Tov�bbi lapok");
+		setTitle("További lapok");
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		pack();
 		setLocationRelativeTo(null);
@@ -77,7 +77,7 @@ public class NoneditableFrame extends JFrame {
 		getContentPane().add(menuPanel, BorderLayout.NORTH);
 		
 		//Action cards label for bigPanel
-		JLabel lblActions = new JLabel("Akci�lapok");
+		JLabel lblActions = new JLabel("Akciólapok");
 		lblActions.setBounds(389, 0, 200, 80);
 		lblActions.setFont(StartFrame.getNoEditListFont());
 		lblActions.setHorizontalAlignment(JLabel.CENTER);
@@ -85,7 +85,7 @@ public class NoneditableFrame extends JFrame {
 		bigPanel.add(lblActions);
 
 		//Check/uncheck all button for menuPanel
-		JButton btnMax = new JButton("Teljes mennyis�g", new ImageIcon(Picture.getPictures().getBtnBg()));
+		JButton btnMax = new JButton("Teljes mennyiség", new ImageIcon(Picture.getPictures().getBtnBg()));
 		btnMax.setForeground(Color.WHITE);
 		btnMax.setFont(StartFrame.getBtnFont());
 		btnMax.setHorizontalTextPosition(JButton.CENTER);
@@ -94,13 +94,15 @@ public class NoneditableFrame extends JFrame {
 		menuPanel.add(btnMax, FlowLayout.LEFT);
 		
 		//Save as pdf button for menuPanel
-		JButton btnSaveNoEdits = new JButton("Jel\u00F6ltek ment\u00E9se", new ImageIcon(Picture.getPictures().getBtnBg()));
+		JButton btnSaveNoEdits = new JButton("Jelöltek mentése", new ImageIcon(Picture.getPictures().getBtnBg()));
 		btnSaveNoEdits.setForeground(Color.WHITE);
 		btnSaveNoEdits.setFont(StartFrame.getBtnFont());
 		btnSaveNoEdits.setHorizontalTextPosition(JButton.CENTER);
 		btnSaveNoEdits.setVerticalTextPosition(JButton.CENTER);
 		btnSaveNoEdits.setPreferredSize(new Dimension(160, 33));
 		menuPanel.add(btnSaveNoEdits);
+		
+		/* removing jrb dependencies
 		
 		//Button panel for 2 JRadioButtons 
 		JButton jrbBtn =  new JButton("" ,new ImageIcon(Picture.getPictures().getBtnBg()));
@@ -109,19 +111,14 @@ public class NoneditableFrame extends JFrame {
 		jrbBtn.setOpaque(false);
 		menuPanel.add(jrbBtn);
 
-		//2. JRadioButton
-		jrbPress = new JRadioButton("Nyomda");
-		jrbPress.setFont(StartFrame.getBtnFont());
-		jrbPress.setForeground(Color.WHITE);
-		jrbPress.setBounds(0, 6, 100, 20);
-		jrbPress.setOpaque(false);
-		jrbBtn.add(jrbPress);
-				
-		//Button group for JRadioButtons
-		ButtonGroup bGroup = new ButtonGroup();
-		bGroup.add(jrbA4);
-		bGroup.add(jrbPress);
-		
+		//JRBBUTTON
+		jrbPrint = new JRadioButton("Nyomda");
+		jrbPrint.setFont(StartFrame.getBtnFont());
+		jrbPrint.setForeground(Color.WHITE);
+		jrbPrint.setBounds(0, 6, 100, 20);
+		jrbPrint.setOpaque(false);
+		jrbBtn.add(jrbPrint);
+		*/
 		NoneditablePanel[] noneditablePanels = new NoneditablePanel[Picture.getNumberOfNoneditable()];
 		
 		//Fills the array
@@ -312,6 +309,6 @@ public class NoneditableFrame extends JFrame {
 	}
 
 	public JRadioButton getJrbPress() {
-		return jrbPress;
+		return jrbPrint;
 	}
 }

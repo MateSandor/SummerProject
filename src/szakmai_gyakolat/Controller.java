@@ -12,7 +12,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -280,7 +284,7 @@ public class Controller {
 				
 				int returnVal;
 				boolean isFileExists;
-				boolean isFileExists2;
+				//boolean isFileExists2;
 				int chosen;
 				JFileChooser fc = new JFileChooser();
 				File file;
@@ -296,19 +300,20 @@ public class Controller {
 					returnVal = fc.showSaveDialog(EditableFrame.getMyEditableFrame());
 					file = fc.getSelectedFile();
 					isFileExists = new File(file +"_szerk._nyomda.pdf").exists();
-					isFileExists2 = new File(file +"_szerk2._nyomda.pdf").exists();
+					//isFileExists2 = new File(file +"_szerk2._nyomda.pdf").exists();
 					
-					BufferedImage[] bufferedFronts1 = createAndFillSelectedEditableFronts_Press(panels);
-					com.itextpdf.text.Image[] fronts1 = bufferedArrayToImage(bufferedFronts1);
-					BufferedImage[] bufferedFronts2 = createAndFillSelectedEditableFronts2_Press(panels);
-					com.itextpdf.text.Image[] fronts2 = bufferedArrayToImage(bufferedFronts2);
+					BufferedImage[] bufferedFronts = createAndFillSelectedEditableFronts_Press(panels);
+					com.itextpdf.text.Image[] fronts = bufferedArrayToImage(bufferedFronts);
+					
+					//BufferedImage[] bufferedFronts2 = createAndFillSelectedEditableFronts2_Press(panels);
+					//com.itextpdf.text.Image[] fronts2 = bufferedArrayToImage(bufferedFronts2);
 				
-					if ((isFileExists || isFileExists2) && returnVal == JFileChooser.APPROVE_OPTION && file != null) {
+					if ((isFileExists) && returnVal == JFileChooser.APPROVE_OPTION && file != null) {
 						chosen = JOptionPane.showConfirmDialog(EditableFrame.getMyEditableFrame(), "Ilyen nevű fájl már létezik. Szeretnéd felűlírni?","Figyelem!", JOptionPane.YES_NO_OPTION);
 						if (chosen == JOptionPane.YES_OPTION) {
 							fc.approveSelection();
-							FileManager.writePdfPrint(fronts1, file + "_szerk._nyomda");
-							FileManager.writePdfPrint(fronts2, file + "_szerk2._nyomda");
+							FileManager.writePdfPrint(fronts, file + "_szerk._nyomda");
+					//		FileManager.writePdfPrint(fronts2, file + "_szerk2._nyomda");
 							JOptionPane.showMessageDialog(EditableFrame.getMyEditableFrame(), "Sikeres mentés!", "Utóirat", 1);
 						}
 					}
@@ -316,8 +321,8 @@ public class Controller {
 						return;
 					}
 					else if (file != null) {
-						FileManager.writePdfPrint(fronts1, file + "_szerk._nyomda");
-						FileManager.writePdfPrint(fronts2, file + "_szerk2._nyomda");
+						FileManager.writePdfPrint(fronts, file + "_szerk._nyomda");
+					//	FileManager.writePdfPrint(fronts2, file + "_szerk2._nyomda");
 						JOptionPane.showMessageDialog(EditableFrame.getMyEditableFrame(), "Sikeres mentés!", "Utóirat", 1);
 					}
 					
@@ -408,10 +413,20 @@ public class Controller {
 	 * @return array of com.itextpdf.text.Image
 	 */
 	public static com.itextpdf.text.Image[] bufferedArrayToImage(BufferedImage[] inputs) {
-		com.itextpdf.text.Image[] output = new com.itextpdf.text.Image[inputs.length];
+		int filledInputs=0;
+		for (int i = 0; i < inputs.length; i++) {
+			if(inputs[i] == null)
+			{
+				continue;
+			}
+			else {
+				filledInputs++;
+			}
+		}
+		com.itextpdf.text.Image[] outputs = new com.itextpdf.text.Image[filledInputs];
 		try {
-			for (int i = 0; i < inputs.length; i++) {
-				output[i] = com.itextpdf.text.Image.getInstance(inputs[i], null);
+			for (int i = 0; i < filledInputs; i++) {
+				outputs[i] = com.itextpdf.text.Image.getInstance(inputs[i], null);
 			}
 		} catch (BadElementException bee) {
 			bee.getMessage();
@@ -419,7 +434,7 @@ public class Controller {
 		catch (IOException ioe) {
 			ioe.getMessage();
 		}
-		return output;
+		return outputs;
 	}
 	
 	/**
@@ -581,6 +596,9 @@ public class Controller {
 		bufferedFronts[idx] = Picture.getPictures().getBackLila_press();
 		return bufferedFronts;
 	}
+	/*
+	 Challenge cards removal
+	  
 	public static BufferedImage[] createAndFillSelectedEditableFronts2_Press(EditablePanel[] panels) {
 		BufferedImage[] bufferedFronts = new BufferedImage[40+1]; //countCheckedEditables(panels)+1
 		int idx = 0;
@@ -592,6 +610,112 @@ public class Controller {
 		bufferedFronts[idx] = Picture.getPictures().getBackTurkiz_press();
 		return bufferedFronts;
 	}
+	*/
+
+	public static void saveAsTxt(JButton buttonSaveAsTxt, EditablePanel[] editablePanels) {
+		buttonSaveAsTxt.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				int returnVal;
+				boolean isFileExists;
+				String cardTexts[] = new String[100];
+				int chosen;
+				JFileChooser fc = new JFileChooser();
+				File file;
+				
+				for (int i = 0; i < editablePanels.length; i++) 
+				{
+					if (i<20) 
+					{
+						cardTexts[i] = (i+1)+".Blue:"+editablePanels[i].getTextField().getText();
+					}
+					else if (i<40) 
+					{
+						cardTexts[i] = (i+1)+".Green:"+editablePanels[i].getTextField().getText();
+					}
+					else if (i<60) 
+					{
+						cardTexts[i] = (i+1)+".Red:"+editablePanels[i].getTextField().getText();
+					}
+					else
+					{
+						cardTexts[i] = (i+1)+".Yellow:"+editablePanels[i].getTextField().getText();
+					}						
+				}
+				
+				fc.setFileFilter(new FileNameExtensionFilter("TXT (*.txt)", "txt")); 	
+				returnVal = fc.showSaveDialog(EditableFrame.getMyEditableFrame());
+				file = fc.getSelectedFile();
+				isFileExists = new File(file +".txt").exists();
+					
+					
+					
+					if ((isFileExists) && returnVal == JFileChooser.APPROVE_OPTION && file != null) {
+						chosen = JOptionPane.showConfirmDialog(EditableFrame.getMyEditableFrame(), "Ilyen nevű fájl már létezik. Szeretnéd felűlírni?","Figyelem!", JOptionPane.YES_NO_OPTION);
+						if (chosen == JOptionPane.YES_OPTION) {
+							fc.approveSelection();
+							try {
+								FileWriter writer = new FileWriter(file+".txt");
+								for (int i = 0; i < editablePanels.length; i++) 
+								{
+									writer.write(cardTexts[i]);
+									writer.write("\n");
+								}
+								writer.close();
+
+							} catch (IOException e1) {
+								e1.printStackTrace();
+							}
+							JOptionPane.showMessageDialog(EditableFrame.getMyEditableFrame(), "Sikeres mentés!", "Utóirat", 1);
+						}
+					}
+					else if (returnVal == JFileChooser.CANCEL_OPTION) {
+						return;
+					}
+					else if (file != null) {
+						JOptionPane.showMessageDialog(EditableFrame.getMyEditableFrame(), "Sikeres mentés!", "Utóirat", 1);
+						try {
+							FileWriter writer = new FileWriter(file+".txt");
+							for (int i = 0; i < editablePanels.length; i++) 
+							{
+								writer.write(cardTexts[i]);
+								writer.write("\n");
+							}
+							writer.close();
+						} catch (IOException e1) 
+						{
+							e1.printStackTrace();
+						}
+					}
+					
+				
+			}
+		});
+	}
+
+	public static void loadFromTxt(JButton buttonLoadTxt)
+	{
+		buttonLoadTxt.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				JFileChooser fc = new JFileChooser();
+				fc.setFileFilter(new FileNameExtensionFilter("TXT (*.txt)", "txt"));
+				fc.showOpenDialog(null);
+				File file = fc.getSelectedFile();
+				try {
+					Scanner myReader = new Scanner(file);
+					while (myReader.hasNextLine()) {
+						String data = myReader.nextLine();
+						System.out.println(data+"\n");
+					}
+					myReader.close();
+				} catch (FileNotFoundException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+	}
 	
-	
-}
+}		

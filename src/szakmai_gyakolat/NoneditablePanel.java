@@ -20,9 +20,9 @@ public class NoneditablePanel extends JPanel {
 	
 	public NoneditablePanel(int inputMaxElement) {
 		
-		maxElement = new Integer[inputMaxElement + 1];
+		maxElement = new Integer[inputMaxElement];
 		for(int i = 0; i <maxElement.length; i++) {
-			maxElement[i] = i;
+			maxElement[i] = i+1;
 		}
 		
 		amount = new JComboBox(maxElement);
@@ -48,7 +48,7 @@ public class NoneditablePanel extends JPanel {
 		lblAmount.setVisible(false);
 		this.add(lblAmount);
 		
-		amount.setBounds(93, 354, 41, 25);
+		amount.setBounds(93, 354, 41, 25); // magical numbers by the other programmer
 		amount.setVisible(false);
 		this.add(amount);
 	}

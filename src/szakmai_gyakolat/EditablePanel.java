@@ -27,20 +27,20 @@ public class EditablePanel extends JPanel {
 	private JTextField textField;
 	private JCheckBox chkBox;
 	
-	private JLabel lblTexNorth;
-	private JLabel lblTexEast;
-	private JLabel lblTexSouth;
-	private JLabel lblTexWest;
-	private String[] directions = { "Észak", "Kelet", "Dél", "Nyugat" };
-	private JComboBox directionList;
+//	private JLabel lblTexNorth;
+//	private JLabel lblTexEast;
+//	private JLabel lblTexSouth;
+//	private JLabel lblTexWest;
+//	private String[] directions = { "Észak", "Kelet", "Dél", "Nyugat" };
+//	private JComboBox directionList;
 	
 	
 	
 	public EditablePanel() {
 		
-		setSize(227, 379);
+		setSize(227, 379); // Other dev's magical number
 		setLayout(null);
-		setBackground(new Color(255, 212, 179));
+		//setBackground(new Color(255, 212, 179));
 		
 		//JLabel for card
 		lblImage = new JLabel("");
@@ -67,6 +67,9 @@ public class EditablePanel extends JPanel {
 		chkBox.setBounds(-4,-1,17,14);;
 		chkBox.setVisible(true);
 		lblImage.add(chkBox);
+	}
+		
+		/* This feature was removed earlier
 		
 		//JLabel for LaTeX of Start card (North)
 		lblTexNorth = new JLabel();
@@ -141,6 +144,7 @@ public class EditablePanel extends JPanel {
 		this.lblTexWest = lblTexWest;
 	}
 
+	
 	public String[] getDirections() {
 		return directions;
 	}
@@ -157,6 +161,8 @@ public class EditablePanel extends JPanel {
 		this.directionList = directionsList;
 	}
 
+*/
+	
 	public JLabel getLblImage() {
 		return lblImage;
 	}
@@ -188,4 +194,8 @@ public class EditablePanel extends JPanel {
 	public void setChkBox(JCheckBox chkBox) {
 		this.chkBox = chkBox;
 	}
+
+
 }
+
+	

@@ -32,7 +32,7 @@ public class Picture {
 		try {
 			
 			for (int i = 0; i < editables.length; i++) {
-				editables[i] = ImageIO.read(getClass().getClassLoader().getResource("path" + i + ".jpg"));
+				editables[i] = ImageIO.read(getClass().getClassLoader().getResource("path" + i + ".png"));
 			}
 			for (int i = 0; i < nonEditables.length; i++) {
 				nonEditables[i] = ImageIO.read(getClass().getClassLoader().getResource("noEdit"+ i +".jpg"));

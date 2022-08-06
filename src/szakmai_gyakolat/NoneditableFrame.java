@@ -123,7 +123,7 @@ public class NoneditableFrame extends JFrame {
 		
 		//Fills the array
 		for(int i = 0; i < noneditablePanels.length; i++) {
-			if (i == 0) {
+/*???			if (i == 0) {
 				noneditablePanels[i] = new NoneditablePanel(5);
 			}
 			else if (i == 1 || i == 2) {
@@ -138,6 +138,8 @@ public class NoneditableFrame extends JFrame {
 			else if (i == 9 || i == 10 || i == 11 || i == 12 ) {
 				noneditablePanels[i] = new NoneditablePanel(5);
 			}
+*/
+			noneditablePanels[i] = new NoneditablePanel(5);
 		}
 		
 		//Panel decoration
@@ -167,10 +169,10 @@ public class NoneditableFrame extends JFrame {
 		noneditablePanels[8].setLocation(376, 80+2*389); bigPanel.add(noneditablePanels[8]);
 		
 		//Locates and adds cards with blue bg to bigPanel
-		noneditablePanels[9].setLocation(20, 80+3*389); bigPanel.add(noneditablePanels[9]);
-		noneditablePanels[10].setLocation(20+237, 80+3*389); bigPanel.add(noneditablePanels[10]);
-		noneditablePanels[11].setLocation(20+2*237, 80+3*389); bigPanel.add(noneditablePanels[11]);
-		noneditablePanels[12].setLocation(20+3*237, 80+3*389); bigPanel.add(noneditablePanels[12]);
+		//noneditablePanels[9].setLocation(20, 80+3*389); bigPanel.add(noneditablePanels[9]);
+		//noneditablePanels[10].setLocation(20+237, 80+3*389); bigPanel.add(noneditablePanels[10]);
+		//noneditablePanels[11].setLocation(20+2*237, 80+3*389); bigPanel.add(noneditablePanels[11]);
+		//noneditablePanels[12].setLocation(20+3*237, 80+3*389); bigPanel.add(noneditablePanels[12]);
 	
 		//Adds action event to btnMax
 		Controller.setActiPerfToNoneditable_btnMax(btnMax, noneditablePanels);

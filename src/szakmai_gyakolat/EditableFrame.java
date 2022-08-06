@@ -2,64 +2,32 @@ package szakmai_gyakolat;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Frame;
-import java.awt.Graphics;
-import java.awt.Toolkit;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.beans.PropertyChangeListener;
-import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.FileNotFoundException;
 
-import javax.imageio.ImageIO;
-import javax.swing.AbstractButton;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.TitlePaneLayout;
 import javax.swing.JButton;
-import javax.swing.JDialog;
-
-import com.itextpdf.text.Image;
-import com.itextpdf.text.log.SysoCounter;
-
-import szakmai_gyakolat.EditablePanel;
-
-import javax.swing.SwingConstants;
 
 public class EditableFrame extends JFrame {
 	
 	private static EditableFrame myEditableFrame;
 	
-	private static final int numberOfEditablePanel = 120;
+	private static final int numberOfEditablePanel = 80;
 	private BufferedImage buttonsBg;
-	private static JButton buttonHelp;
 	private EditablePanel[] editablePanels;
 	//private JRadioButton jrbA4;
-	private JRadioButton jrbPrint;
+	//private JRadioButton jrbPrint;
 	
 	public EditableFrame() {
 		
@@ -73,7 +41,7 @@ public class EditableFrame extends JFrame {
 		
 		//Colored background panel
 		PaperPanel fixPanel = new PaperPanel();
-		fixPanel.setPreferredSize(new Dimension(978, 11810));
+		fixPanel.setPreferredSize(new Dimension(978,(int) Math.floor(98.416*numberOfEditablePanel))); //Size was determined by other programmer, I converted it to function with numberOfEditablePanel
 		getContentPane().add(fixPanel);
 		
 		//Scrollpane for fixpanel
@@ -96,23 +64,43 @@ public class EditableFrame extends JFrame {
 		getContentPane().add(menuPanel, BorderLayout.NORTH);
 		menuPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 5));
 		
-		//Check/uncheck all button
-		JButton btnChkAll = new JButton("Összes kijelölése", new ImageIcon(Picture.getPictures().getBtnBg()));
-		btnChkAll.setForeground(Color.WHITE);
-		btnChkAll.setFont(StartFrame.getBtnFont());
-		btnChkAll.setHorizontalTextPosition(JButton.CENTER);
-		btnChkAll.setVerticalTextPosition(JButton.CENTER);
-		btnChkAll.setPreferredSize(new Dimension(140, 33));
-		menuPanel.add(btnChkAll, FlowLayout.LEFT);
+		//Save to txt button
+		JButton buttonSaveAsTxt = new JButton("TXT mentés", new ImageIcon(Picture.getPictures().getBtnBg()));
+		buttonSaveAsTxt.setForeground(Color.WHITE);
+		buttonSaveAsTxt.setFont(StartFrame.getBtnFont());
+		buttonSaveAsTxt.setHorizontalTextPosition(JButton.CENTER);
+		buttonSaveAsTxt.setVerticalTextPosition(JButton.CENTER);
+		buttonSaveAsTxt.setPreferredSize(new Dimension(140, 33));
+		buttonSaveAsTxt.setToolTipText("Ide kattintva le tudja tölteni az eddig szerkesztett kártyákat txt formában.");
+		menuPanel.add(buttonSaveAsTxt, FlowLayout.LEFT);
 		
-		//Save as pdf button
-		JButton btnSavePathFront = new JButton("Kijelöltek mentése", new ImageIcon(Picture.getPictures().getBtnBg()));
-		btnSavePathFront.setForeground(Color.WHITE);
-		btnSavePathFront.setFont(StartFrame.getBtnFont());
-		btnSavePathFront.setHorizontalTextPosition(JButton.CENTER);
-		btnSavePathFront.setVerticalTextPosition(JButton.CENTER);
-		btnSavePathFront.setPreferredSize(new Dimension(160, 33));
-		menuPanel.add(btnSavePathFront);
+		//Load from txt button
+		JButton buttonLoadTxt = new JButton("TXT betöltés", new ImageIcon(Picture.getPictures().getBtnBg()));
+		buttonLoadTxt.setForeground(Color.WHITE);
+		buttonLoadTxt.setFont(StartFrame.getBtnFont());
+		buttonLoadTxt.setHorizontalTextPosition(JButton.CENTER);
+		buttonLoadTxt.setVerticalTextPosition(JButton.CENTER);
+		buttonLoadTxt.setPreferredSize(new Dimension(140, 33));
+		buttonLoadTxt.setToolTipText("Ide kattintva fel tudja tölteni egy .txt fájlban szerkesztett káryták szövegeit");
+		menuPanel.add(buttonLoadTxt);
+		
+		//Check/uncheck all button
+		JButton buttonCheckAll = new JButton("Összes kijelölése", new ImageIcon(Picture.getPictures().getBtnBg()));
+		buttonCheckAll.setForeground(Color.WHITE);
+		buttonCheckAll.setFont(StartFrame.getBtnFont());
+		buttonCheckAll.setHorizontalTextPosition(JButton.CENTER);
+		buttonCheckAll.setVerticalTextPosition(JButton.CENTER);
+		buttonCheckAll.setPreferredSize(new Dimension(140, 33));
+		menuPanel.add(buttonCheckAll);
+		
+		//Save as PDP button
+		JButton buttonSaveAsPdf = new JButton("Kijelöltek mentése", new ImageIcon(Picture.getPictures().getBtnBg()));
+		buttonSaveAsPdf.setForeground(Color.WHITE);
+		buttonSaveAsPdf.setFont(StartFrame.getBtnFont());
+		buttonSaveAsPdf.setHorizontalTextPosition(JButton.CENTER);
+		buttonSaveAsPdf.setVerticalTextPosition(JButton.CENTER);
+		buttonSaveAsPdf.setPreferredSize(new Dimension(160, 33));
+		menuPanel.add(buttonSaveAsPdf);
 		
 		/* Removing jrb completely
 		
@@ -133,7 +121,7 @@ public class EditableFrame extends JFrame {
 		 */
 		
 		//Help button
-		buttonHelp = new JButton("Segítség!", new ImageIcon(Picture.getPictures().getBtnBg()));
+		JButton buttonHelp = new JButton("Segítség!", new ImageIcon(Picture.getPictures().getBtnBg()));
 		buttonHelp.setOpaque(false);
 		buttonHelp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -170,12 +158,12 @@ public class EditableFrame extends JFrame {
 			editablePanels[i] = new EditablePanel();
 		}
 		
-		//positions and adds the 40 panels from the array (4x10)
+		//positions and adds the panels from the array (4 x numberOfEditablePanel)
 		
 		int countedEditablePanel = 0;
 		int k = 0;
 		for (int i = 0; i < 30; i++) {
-			for (int j = 0; j < 4 && countedEditablePanel < 120; j++) {
+			for (int j = 0; j < 4 && countedEditablePanel < numberOfEditablePanel; j++) {
 				editablePanels[k].setLocation(20 + j*237, 80 + i*389);
 				bigPanel.add(editablePanels[k]);
 				k++;
@@ -197,40 +185,42 @@ public class EditableFrame extends JFrame {
 		}
 		
 		//sets actionevent to the textfields of the panels
-		for (int i = 0; i < 120; i++) {
-			if (i >= 0 && i < 120) Controller.setAction_to_textField_rotate(editablePanels[i]);
+		for (int i = 0; i < numberOfEditablePanel; i++) {
+			if (i >= 0 && i < numberOfEditablePanel) Controller.setAction_to_textField_rotate(editablePanels[i]);
 		}
 	
 		//adds images to the imageLabel of the 41 panels
 		for (int i = 0; i < 20; i++) {
-			editablePanels[i].getLblImage().setIcon(new ImageIcon(Picture.getPictures().getEditables()[0])); 
+			editablePanels[i].getLblImage().setIcon(new ImageIcon((Picture.getPictures().getEditables()[0]).getScaledInstance(227, 353, Image.SCALE_SMOOTH))); 
 		}
 		for (int i = 20; i < 40; i++) {
-			editablePanels[i].getLblImage().setIcon(new ImageIcon(Picture.getPictures().getEditables()[1])); 
+			editablePanels[i].getLblImage().setIcon(new ImageIcon((Picture.getPictures().getEditables()[1]).getScaledInstance(227, 353, Image.SCALE_SMOOTH))); 
 		}
 		for (int i = 40; i < 60; i++) {
-			editablePanels[i].getLblImage().setIcon(new ImageIcon(Picture.getPictures().getEditables()[2])); 
+			editablePanels[i].getLblImage().setIcon(new ImageIcon((Picture.getPictures().getEditables()[2]).getScaledInstance(227, 353, Image.SCALE_SMOOTH))); 
 		}
 		for (int i = 60; i < 80; i++) {
-			editablePanels[i].getLblImage().setIcon(new ImageIcon(Picture.getPictures().getEditables()[3])); 
+			editablePanels[i].getLblImage().setIcon(new ImageIcon((Picture.getPictures().getEditables()[3]).getScaledInstance(227, 353, Image.SCALE_SMOOTH)));
 		}
-		for (int i = 80; i < 120; i++) {
-			editablePanels[i].getLblImage().setIcon(new ImageIcon(Picture.getPictures().getEditables()[4])); 
-		}
+		//for (int i = 80; i < 120; i++) {
+		//	editablePanels[i].getLblImage().setIcon(new ImageIcon(Picture.getPictures().getEditables()[4])); 
+		//}
 			
-			//sets bounds of label for LaTeX (0-17)
-			for (int i = 0 ; i < 120; i++) {
-				editablePanels[i].getLblTex().setBounds(12, 12, 210, 329); // 227/3, 12, 227/3 + 5, 329 volt
-			}
+		//sets bounds of label for LaTeX (0-17)
+		for (int i = 0 ; i < numberOfEditablePanel; i++) {
+			editablePanels[i].getLblTex().setBounds(12, 12, 210, 329); // 227/3, 12, 227/3 + 5, 329 volt
+		}
 
-			Controller.check_uncheck_all(btnChkAll, editablePanels);
-			Controller.setActiPerfToSaveEditables(btnSavePathFront, editablePanels);
+		Controller.check_uncheck_all(buttonCheckAll, editablePanels);
+		Controller.setActiPerfToSaveEditables(buttonSaveAsPdf, editablePanels);
+		Controller.saveAsTxt(buttonSaveAsTxt, editablePanels);
+		Controller.loadFromTxt(buttonLoadTxt);
 			
 	}
 	
-	public static JButton getBtnHelp() {
-		return buttonHelp;
-	}
+	//public static JButton getBtnHelp() {
+	//	return buttonHelp;
+	//}
 	
 	public static EditableFrame getMyEditableFrame() {
 		return myEditableFrame;
@@ -244,8 +234,8 @@ public class EditableFrame extends JFrame {
 		return editablePanels;
 	}
 	
-	public JRadioButton getJrbPress() {
-		return jrbPrint;
-	}
+	//public JRadioButton getJrbPress() {
+	//	return jrbPrint;
+	//}
 	
 }

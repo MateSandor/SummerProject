@@ -13,7 +13,6 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
@@ -626,21 +625,25 @@ public class Controller {
 				
 				for (int i = 0; i < editablePanels.length; i++) 
 				{
-					if (i<20) 
+					if (i<9) 
 					{
-						cardTexts[i] = (i+1)+".Blue:"+editablePanels[i].getTextField().getText();
+						cardTexts[i] = "0"+(i+1)+".B:"+editablePanels[i].getTextField().getText();
+					}
+					else if (i<20) 
+					{
+						cardTexts[i] = (i+1)+".B:"+editablePanels[i].getTextField().getText();
 					}
 					else if (i<40) 
 					{
-						cardTexts[i] = (i+1)+".Green:"+editablePanels[i].getTextField().getText();
+						cardTexts[i] = (i+1)+".G:"+editablePanels[i].getTextField().getText();
 					}
 					else if (i<60) 
 					{
-						cardTexts[i] = (i+1)+".Red:"+editablePanels[i].getTextField().getText();
+						cardTexts[i] = (i+1)+".R:"+editablePanels[i].getTextField().getText();
 					}
 					else
 					{
-						cardTexts[i] = (i+1)+".Yellow:"+editablePanels[i].getTextField().getText();
+						cardTexts[i] = (i+1)+".Y:"+editablePanels[i].getTextField().getText();
 					}						
 				}
 				
@@ -694,7 +697,7 @@ public class Controller {
 		});
 	}
 
-	public static void loadFromTxt(JButton buttonLoadTxt)
+	public static void loadFromTxt(JButton buttonLoadTxt, EditablePanel[] editablePanels)
 	{
 		buttonLoadTxt.addActionListener(new ActionListener() 
 		{
@@ -706,9 +709,12 @@ public class Controller {
 				File file = fc.getSelectedFile();
 				try {
 					Scanner myReader = new Scanner(file);
+					int i=0;
 					while (myReader.hasNextLine()) {
-						String data = myReader.nextLine();
-						System.out.println(data+"\n");
+						String data = myReader.nextLine().substring(5);
+						editablePanels[i].getTextField().setText(data);
+						actionRotate45(editablePanels[i]);
+						i++;
 					}
 					myReader.close();
 				} catch (FileNotFoundException e1) {
@@ -717,5 +723,12 @@ public class Controller {
 			}
 		});
 	}
+	
+	public static void actionRotate45(EditablePanel panel) 
+	{
+		panel.getLblTex().setIcon(new ImageIcon(rotate45_ccw(texToImg(panel.getTextField().getText()))));
+	}
+	
+	
 	
 }		

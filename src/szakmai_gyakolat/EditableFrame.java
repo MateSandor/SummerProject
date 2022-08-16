@@ -17,6 +17,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import javax.swing.plaf.ToolTipUI;
+import javax.swing.plaf.basic.BasicToolTipUI;
 import javax.swing.JButton;
 
 public class EditableFrame extends JFrame {
@@ -181,7 +183,8 @@ public class EditableFrame extends JFrame {
 		for (int i = 0; i < editablePanels.length; i++) {
 			editablePanels[i].getTextField().setOpaque(false);
 			editablePanels[i].getTextField().setFont(new Font("Consolas", Font.BOLD, 14));
-			editablePanels[i].getTextField().setUI(new HintTextFieldUI("Ide írj...", true));
+			editablePanels[i].getTextField().setUI(new HintTextFieldUI("Szöveg helye", true));
+			editablePanels[i].getTextField().setToolTipText("Enter lenyomásával jelenik meg a kártyán a szöveg.");
 		}
 		
 		//sets actionevent to the textfields of the panels
@@ -214,7 +217,7 @@ public class EditableFrame extends JFrame {
 		Controller.check_uncheck_all(buttonCheckAll, editablePanels);
 		Controller.setActiPerfToSaveEditables(buttonSaveAsPdf, editablePanels);
 		Controller.saveAsTxt(buttonSaveAsTxt, editablePanels);
-		Controller.loadFromTxt(buttonLoadTxt);
+		Controller.loadFromTxt(buttonLoadTxt, editablePanels);
 			
 	}
 	

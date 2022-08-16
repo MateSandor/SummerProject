@@ -1,24 +1,10 @@
 package szakmai_gyakolat;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Rectangle2D;
-
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import com.itextpdf.*;
 
 public class EditablePanel extends JPanel {
 
@@ -66,6 +52,7 @@ public class EditablePanel extends JPanel {
 		chkBox = new JCheckBox("");
 		chkBox.setBounds(-4,-1,17,14);;
 		chkBox.setVisible(true);
+		chkBox.setFocusable(false);
 		lblImage.add(chkBox);
 	}
 		

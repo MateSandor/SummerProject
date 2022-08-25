@@ -8,6 +8,10 @@ import javax.swing.SwingConstants;
 
 public class EditablePanel extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel lblImage;
 	private JLabel lblTex;
 	private JTextField textField;
@@ -24,13 +28,14 @@ public class EditablePanel extends JPanel {
 	
 	public EditablePanel() {
 		
-		setSize(227, 379); // Other dev's magical number
+		//setSize(227, 379); // Other dev's magical number
+		setSize(675,1050);
 		setLayout(null);
 		//setBackground(new Color(255, 212, 179));
 		
 		//JLabel for card
 		lblImage = new JLabel("");
-		lblImage.setBounds(0, 0, 227, 353);
+		lblImage.setBounds(0, 0, 675, 1050);
 		lblImage.setVisible(true);
 		this.add(lblImage);
 		
@@ -44,13 +49,13 @@ public class EditablePanel extends JPanel {
 		
 		//JTextField for input
 		textField = new JTextField();
-		textField.setBounds(0, 354, 227, 25);
+		textField.setBounds(0, 1050, 675, 25);
 		textField.setVisible(true);
 		this.add(textField);
 			
 		//JCheckBox for select
 		chkBox = new JCheckBox("");
-		chkBox.setBounds(-4,-1,17,14);;
+		chkBox.setBounds(-4,-1,17,14);
 		chkBox.setVisible(true);
 		chkBox.setFocusable(false);
 		lblImage.add(chkBox);

@@ -36,7 +36,6 @@ public class Controller {
 	
 	private static int  posX = 0, posY = 0;
 	private static boolean selected = false;
-	private static int checkedEditables;
 	private static boolean selectedMax = false;
 	private static int numberOfFile;
 	
@@ -153,7 +152,7 @@ public class Controller {
 		dialog.addWindowListener(new java.awt.event.WindowAdapter() {
 		    @Override
 		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-				dialog.setHelpDialogCreated(false);
+				HelpDialog.setHelpDialogCreated(false);
 		    }
 		});
 	}
@@ -199,7 +198,6 @@ public class Controller {
 		for (int i = 0; i < panels.length; i++) {
 			if (panels[i].getChkBox().isSelected() == true) {
 				imgCount ++;
-				checkedEditables++;
 			}
 		}
 		return imgCount;
@@ -364,7 +362,7 @@ public class Controller {
 					isFileExists = new File(file +"_akcio_nyomda.pdf").exists();
 					
 					BufferedImage[] bufferedActions = createAndFillSelectedActions();
-					BufferedImage[] bufferedTreasures = createAndFillSelectedBlues();
+					//BufferedImage[] bufferedTreasures = createAndFillSelectedBlues();
 					//already existing name of a file YES/NO option of replacing
 					if (isFileExists && returnVal == JFileChooser.APPROVE_OPTION && file != null){
 						chosen = JOptionPane.showConfirmDialog(EditableFrame.getMyEditableFrame(), "Ilyen nevű fájl már léteszik. Szeretnéd felülírni?","Figyelem!", JOptionPane.YES_NO_OPTION);
@@ -372,15 +370,15 @@ public class Controller {
 							fc.approveSelection(); //Accept replacement
 							numberOfFile = 0;
 							if (NoneditableFrame.getSumAction() > 0) { //action prints
-								com.itextpdf.text.Image[] actions = bufferedArrayToImage(bufferedActions); 
-								FileManager.writePdfPrint(actions, file + "_akcio_nyomda");
+								com.itextpdf.text.Image[] actionCards = bufferedArrayToImage(bufferedActions); 
+								FileManager.writePdfPrint(actionCards, file + "_akcio_nyomda");
 								numberOfFile++;
 							}
-							if (NoneditableFrame.getSumBlue() > 0) { //challenge prints
+							/*if (NoneditableFrame.getSumBlue() > 0) { //challenge prints
 								com.itextpdf.text.Image[] treasures = bufferedArrayToImage(bufferedTreasures); 
 								FileManager.writePdfPrint(treasures, file + "_szerencseproba_nyomda");
 								numberOfFile++;
-							}
+							} */
 							JOptionPane.showMessageDialog(EditableFrame.getMyEditableFrame(), "Sikeres mentés!\n Létrehozott fájl(ok) száma: " + numberOfFile, "Utóirat", 1);
 						}
 					}
@@ -394,11 +392,11 @@ public class Controller {
 							FileManager.writePdfPrint(actions, file + "_akcio_nyomda");
 							numberOfFile++;
 						}
-						if (NoneditableFrame.getSumBlue() > 0) {
+						/*if (NoneditableFrame.getSumBlue() > 0) {
 							com.itextpdf.text.Image[] treasures = bufferedArrayToImage(bufferedTreasures); 
 							FileManager.writePdfPrint(treasures, file + "_szerencseproba_nyomda");
 							numberOfFile++;
-						}
+						}*/
 						JOptionPane.showMessageDialog(EditableFrame.getMyEditableFrame(), "Sikeres mentés!\n Létrehozott fájl(ok) száma: " + numberOfFile, "Utóirat", 1);
 					}
 				}

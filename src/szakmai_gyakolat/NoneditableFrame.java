@@ -3,25 +3,21 @@ package szakmai_gyakolat;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
-import javax.swing.border.EmptyBorder;
 
 public class NoneditableFrame extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static NoneditableFrame myNoEditFrame;
 	private JRadioButton jrbA4;
 	private JRadioButton jrbPrint;
@@ -149,7 +145,7 @@ public class NoneditableFrame extends JFrame {
 		
 		//Adds images to the lblImage of panels
 		for (int i = 0; i < noneditablePanels.length; i++) {
-			noneditablePanels[i].getLblImage().setIcon(new ImageIcon(Picture.getPictures().getNoEdits()[i]));
+			noneditablePanels[i].getLblImage().setIcon(new ImageIcon(Picture.getPictures().getNoEdits()[i].getScaledInstance(227, 353, 0)));
 		}
 		
 		//Adds actionPerformed to all NoEditPanels
@@ -164,9 +160,9 @@ public class NoneditableFrame extends JFrame {
 		noneditablePanels[3].setLocation(20+3*237, 80); bigPanel.add(noneditablePanels[3]);
 		noneditablePanels[4].setLocation(20, 80+389); bigPanel.add(noneditablePanels[4]);
 		noneditablePanels[5].setLocation(20+237, 80+389); bigPanel.add(noneditablePanels[5]);
-		noneditablePanels[6].setLocation(20+2*237, 80+389); bigPanel.add(noneditablePanels[6]);
-		noneditablePanels[7].setLocation(20+3*237, 80+389); bigPanel.add(noneditablePanels[7]);
-		noneditablePanels[8].setLocation(376, 80+2*389); bigPanel.add(noneditablePanels[8]);
+		//noneditablePanels[6].setLocation(20+2*237, 80+389); bigPanel.add(noneditablePanels[6]);
+		//noneditablePanels[7].setLocation(20+3*237, 80+389); bigPanel.add(noneditablePanels[7]);
+		//noneditablePanels[8].setLocation(376, 80+2*389); bigPanel.add(noneditablePanels[8]);
 		
 		//Locates and adds cards with blue bg to bigPanel
 		//noneditablePanels[9].setLocation(20, 80+3*389); bigPanel.add(noneditablePanels[9]);

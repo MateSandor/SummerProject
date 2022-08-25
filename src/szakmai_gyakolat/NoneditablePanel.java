@@ -1,8 +1,5 @@
 package szakmai_gyakolat;
 
-import java.awt.Color;
-
-import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -10,12 +7,16 @@ import javax.swing.JPanel;
 
 public class NoneditablePanel extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static int defaultAmount = 0;
 	private static Integer[] maxElement;
 	
 	private JLabel lblImage;
 	private JCheckBox chkBox;
-	private JComboBox amount;
+	private JComboBox<?> amount;
 	private JLabel lblAmount;
 	
 	public NoneditablePanel(int inputMaxElement) {
@@ -25,7 +26,7 @@ public class NoneditablePanel extends JPanel {
 			maxElement[i] = i+1;
 		}
 		
-		amount = new JComboBox(maxElement);
+		amount = new JComboBox<Object>(maxElement);
 		
 		this.setSize(227, 379);
 		this.setLayout(null);
@@ -69,11 +70,11 @@ public class NoneditablePanel extends JPanel {
 		this.chkBox = chkBox;
 	}
 	
-	public JComboBox getComboBox() {
+	public JComboBox<?> getComboBox() {
 		return amount;
 	}
 	
-	public void setComboBox(JComboBox comboBox) {
+	public void setComboBox(JComboBox<?> comboBox) {
 		this.amount = comboBox;
 	}
 	

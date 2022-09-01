@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.Transparency;
 import java.awt.event.ActionEvent;
@@ -52,7 +53,7 @@ public class Controller {
 		} catch (org.scilab.forge.jlatexmath.ParseException pe) {
 			JOptionPane.showMessageDialog(null, "Rossz bemenet", "LaTeX", 1);
 		}
-		TeXIcon ti = formula.createTeXIcon(TeXConstants.STYLE_DISPLAY, 20);
+		TeXIcon ti = formula.createTeXIcon(TeXConstants.STYLE_DISPLAY, 30);
 		BufferedImage b = new BufferedImage(ti.getIconWidth(), ti.getIconHeight(), BufferedImage.TYPE_4BYTE_ABGR);
 		ti.paintIcon(new JLabel(), b.getGraphics(), 0, 0);
 		
@@ -423,7 +424,7 @@ public class Controller {
 		com.itextpdf.text.Image[] outputs = new com.itextpdf.text.Image[filledInputs];
 		try {
 			for (int i = 0; i < filledInputs; i++) {
-				outputs[i] = com.itextpdf.text.Image.getInstance(inputs[i], null);
+				outputs[i] = com.itextpdf.text.Image.getInstance(inputs[i].getScaledInstance(675, 1050, Image.SCALE_SMOOTH), null);
 			}
 		} catch (BadElementException bee) {
 			bee.getMessage();

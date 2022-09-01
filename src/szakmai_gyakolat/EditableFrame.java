@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
@@ -22,15 +23,16 @@ public class EditableFrame extends JFrame {
 	private static EditableFrame myEditableFrame;
 	
 	private static final int numberOfEditablePanel = 80;
+	
 	private EditablePanel[] editablePanels;
 	//private JRadioButton jrbA4;
 	//private JRadioButton jrbPrint;
 	
 	public EditableFrame() {
 		
-		setPreferredSize(new Dimension(1366, 768));
+		setPreferredSize(new Dimension(1020, 574));
 		
-		setMinimumSize(new Dimension(675, 300));
+		setMinimumSize(new Dimension(300, 450));
 		setTitle("Lapszerkesztő");
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		pack();
@@ -39,7 +41,9 @@ public class EditableFrame extends JFrame {
 		
 		//Colored background panel
 		PaperPanel fixPanel = new PaperPanel();
-		fixPanel.setPreferredSize(new Dimension(978,(int) Math.floor(98.416*numberOfEditablePanel))); //Size was determined by other programmer, I converted it to function with numberOfEditablePanel
+		//fixPanel.setPreferredSize(new Dimension(978, 11810));
+		fixPanel.setPreferredSize(new Dimension(978,99*numberOfEditablePanel)); //Size was determined by other programmer, I converted it to function with numberOfEditablePanel
+		fixPanel.setBackground(Color.decode("#E9D8C4"));
 		getContentPane().add(fixPanel);
 		
 		//Scrollpane for fixpanel
@@ -50,7 +54,8 @@ public class EditableFrame extends JFrame {
 		//the panels lie on it
 		JPanel bigPanel = new JPanel();
 		bigPanel.setBackground(Color.cyan);
-		bigPanel.setPreferredSize(new Dimension(675*2+200, 11800));
+		//bigPanel.setPreferredSize(new Dimension(978, 11810));
+		bigPanel.setPreferredSize(new Dimension(978, 99*numberOfEditablePanel)); //Size was determined by other programmer, I converted it to function with numberOfEditablePanel
 		bigPanel.setLayout(null);
 		bigPanel.setOpaque(false);
 		fixPanel.add(bigPanel);
@@ -161,8 +166,8 @@ public class EditableFrame extends JFrame {
 		int countedEditablePanel = 0;
 		int k = 0;
 		for (int i = 0; i < 30; i++) {
-			for (int j = 0; j < 2 && countedEditablePanel < numberOfEditablePanel; j++) {
-				editablePanels[k].setLocation(50 + j*675, 150 + i*1050);
+			for (int j = 0; j < 4 && countedEditablePanel < numberOfEditablePanel; j++) {
+				editablePanels[k].setLocation(20 + j*237, 80 + i*389);
 				bigPanel.add(editablePanels[k]);
 				k++;
 				countedEditablePanel++;
@@ -190,16 +195,16 @@ public class EditableFrame extends JFrame {
 	
 		//adds images to the imageLabel of the panels
 		for (int i = 0; i < 20; i++) {
-			editablePanels[i].getLblImage().setIcon(new ImageIcon((Picture.getPictures().getEditables()[0]))); 
+			editablePanels[i].getLblImage().setIcon(new ImageIcon((Picture.getPictures().getEditables()[0].getScaledInstance(227, 353,Image.SCALE_SMOOTH)))); 
 		}
 		for (int i = 20; i < 40; i++) {
-			editablePanels[i].getLblImage().setIcon(new ImageIcon((Picture.getPictures().getEditables()[1]))); 
+			editablePanels[i].getLblImage().setIcon(new ImageIcon((Picture.getPictures().getEditables()[1].getScaledInstance(227, 353,Image.SCALE_SMOOTH)))); 
 		}
 		for (int i = 40; i < 60; i++) {
-			editablePanels[i].getLblImage().setIcon(new ImageIcon((Picture.getPictures().getEditables()[2]))); 
+			editablePanels[i].getLblImage().setIcon(new ImageIcon((Picture.getPictures().getEditables()[2].getScaledInstance(227, 353,Image.SCALE_SMOOTH)))); 
 		}
 		for (int i = 60; i < 80; i++) {
-			editablePanels[i].getLblImage().setIcon(new ImageIcon((Picture.getPictures().getEditables()[3])));
+			editablePanels[i].getLblImage().setIcon(new ImageIcon((Picture.getPictures().getEditables()[3].getScaledInstance(227, 353,Image.SCALE_SMOOTH))));
 		}
 		//for (int i = 80; i < 120; i++) {
 		//	editablePanels[i].getLblImage().setIcon(new ImageIcon(Picture.getPictures().getEditables()[4])); 

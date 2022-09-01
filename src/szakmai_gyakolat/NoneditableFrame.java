@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Image;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -57,6 +59,7 @@ public class NoneditableFrame extends JFrame {
 		//Colored background panel
 		PaperPanel fixPanel = new PaperPanel();
 		fixPanel.setPreferredSize(new Dimension(978,1700));
+		fixPanel.setBackground(Color.decode("#E9D8C4"));
 		getContentPane().add(fixPanel);
 				
 		//JScrollPane for fixPanel
@@ -145,7 +148,7 @@ public class NoneditableFrame extends JFrame {
 		
 		//Adds images to the lblImage of panels
 		for (int i = 0; i < noneditablePanels.length; i++) {
-			noneditablePanels[i].getLblImage().setIcon(new ImageIcon(Picture.getPictures().getNoEdits()[i].getScaledInstance(227, 353, 0)));
+			noneditablePanels[i].getLblImage().setIcon(new ImageIcon(Picture.getPictures().getNoEdits()[i].getScaledInstance(227, 353,Image.SCALE_SMOOTH)));
 		}
 		
 		//Adds actionPerformed to all NoEditPanels

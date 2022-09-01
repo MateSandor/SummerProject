@@ -63,7 +63,7 @@ public class StartFrame extends JFrame {
 		//Background
 		StartPanel startPanel = new StartPanel();
 		getContentPane().add(startPanel);
-		startPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+		startPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
 		startPanel.setLayout(null);
 		
 		//Editable cards option

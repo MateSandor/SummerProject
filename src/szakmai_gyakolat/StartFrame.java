@@ -1,38 +1,25 @@
 package szakmai_gyakolat;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import szakmai_gyakolat.EditableFrame;
-
-import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
-import java.awt.Frame;
 
 public class StartFrame extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private static StartFrame myStartFrame;
 	
-	private BufferedImage buttonsBg;	
 	private JPanel contentPane;
 	
 	private static Font btnFont = new Font("Lucida Calligraphy", Font.BOLD, 12);
@@ -76,7 +63,7 @@ public class StartFrame extends JFrame {
 		//Background
 		StartPanel startPanel = new StartPanel();
 		getContentPane().add(startPanel);
-		startPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+		startPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
 		startPanel.setLayout(null);
 		
 		//Editable cards option

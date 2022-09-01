@@ -1,7 +1,6 @@
 package szakmai_gyakolat;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -9,8 +8,8 @@ import javax.swing.JOptionPane;
 
 public class Picture {
 	
-	private static final int numberOfEditable = 5;
-	private static final int numberOfNoneditable = 13;
+	private static final int numberOfEditable = 4;
+	private static final int numberOfNoneditable = 6;
 	
 	private static Picture pictures;
 	
@@ -32,21 +31,21 @@ public class Picture {
 		try {
 			
 			for (int i = 0; i < editables.length; i++) {
-				editables[i] = ImageIO.read(getClass().getClassLoader().getResource("path" + i + ".png"));
+				editables[i] = ImageIO.read(getClass().getClassLoader().getResource("edit" + i + ".png"));
 			}
 			for (int i = 0; i < nonEditables.length; i++) {
-				nonEditables[i] = ImageIO.read(getClass().getClassLoader().getResource("noEdit"+ i +".jpg"));
+				nonEditables[i] = ImageIO.read(getClass().getClassLoader().getResource("noEdit"+ i +".png"));
 			}
 			
 			btnBg = ImageIO.read(getClass().getClassLoader().getResource("startPanelButtons.jpg"));
 			editorBg = ImageIO.read(getClass().getClassLoader().getResource("oldRotated.jpg"));
-			startBg = ImageIO.read(getClass().getClassLoader().getResource("New_background.png"));
+			startBg = ImageIO.read(getClass().getClassLoader().getResource("startBackground.png"));
 			headBg = ImageIO.read(getClass().getClassLoader().getResource("head.jpg"));
 			help = ImageIO.read(getClass().getClassLoader().getResource("help.jpg"));
 
 			
 			backFekete_press = ImageIO.read(getClass().getClassLoader().getResource("backFekete_press.jpg"));
-			backLila_press = ImageIO.read(getClass().getClassLoader().getResource("backLila_press.jpg"));
+			backLila_press = ImageIO.read(getClass().getClassLoader().getResource("backLila_press.png"));
 			backTurkiz_press = ImageIO.read(getClass().getClassLoader().getResource("backTurkiz_press.jpg"));
 			
 			

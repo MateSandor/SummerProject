@@ -1,33 +1,16 @@
 package szakmai_gyakolat;
 
-import com.itextpdf.text.List;
 import com.itextpdf.text.PageSize;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.log.SysoCounter;
-import com.itextpdf.text.pdf.PdfContentByte;
-import com.itextpdf.text.pdf.PdfDocument;
-import com.itextpdf.text.pdf.PdfException;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.itextpdf.text.pdf.draw.LineSeparator;
-
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
-import com.itextpdf.awt.geom.Rectangle;
 import com.itextpdf.text.BadElementException;
-import com.itextpdf.text.BaseColor;
-import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Element;
 import com.itextpdf.text.Image;
-import com.itextpdf.text.pdf.PdfWriter;
 
 public class FileManager {
 	
@@ -100,7 +83,7 @@ public class FileManager {
 	public static void writePdfPrint (Image[] cards,  String fileName) {
 		
 		Document document = new Document();
-		document.setPageSize(new com.itextpdf.text.Rectangle(227,353));
+		document.setPageSize(new com.itextpdf.text.Rectangle(675,1050));
 		document.setMargins(0, 0, 0, 0);
 		
 		try {

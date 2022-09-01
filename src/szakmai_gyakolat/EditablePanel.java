@@ -8,6 +8,7 @@ import javax.swing.SwingConstants;
 
 public class EditablePanel extends JPanel {
 
+	private static final long serialVersionUID = 1L;
 	private JLabel lblImage;
 	private JLabel lblTex;
 	private JTextField textField;
@@ -24,7 +25,8 @@ public class EditablePanel extends JPanel {
 	
 	public EditablePanel() {
 		
-		setSize(227, 379); // Other dev's magical number
+		//setSize(227, 379); // Other dev's magical number
+		this.setSize(227, 379);
 		setLayout(null);
 		//setBackground(new Color(255, 212, 179));
 		
@@ -50,7 +52,7 @@ public class EditablePanel extends JPanel {
 			
 		//JCheckBox for select
 		chkBox = new JCheckBox("");
-		chkBox.setBounds(-4,-1,17,14);;
+		chkBox.setBounds(-4,-1,17,14);
 		chkBox.setVisible(true);
 		chkBox.setFocusable(false);
 		lblImage.add(chkBox);
@@ -147,7 +149,6 @@ public class EditablePanel extends JPanel {
 	public void setDirectionsList(JComboBox directionsList) {
 		this.directionList = directionsList;
 	}
-
 */
 	
 	public JLabel getLblImage() {

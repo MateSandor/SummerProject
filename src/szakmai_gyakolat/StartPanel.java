@@ -5,9 +5,14 @@ import javax.swing.JPanel;
 
 public class StartPanel extends JPanel {
   
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	protected void paintComponent(Graphics g) {
     	super.paintComponent(g);
-		g.drawImage(Picture.getPictures().getStartBg(), 0, 0, this);
+		g.drawImage(Picture.getPictures().getStartBg().getScaledInstance(350, 450, 0), 0, 0, this);
 	}
 }

@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.Transparency;
 import java.awt.event.ActionEvent;
@@ -36,7 +37,6 @@ public class Controller {
 	
 	private static int  posX = 0, posY = 0;
 	private static boolean selected = false;
-	private static int checkedEditables;
 	private static boolean selectedMax = false;
 	private static int numberOfFile;
 	
@@ -53,7 +53,7 @@ public class Controller {
 		} catch (org.scilab.forge.jlatexmath.ParseException pe) {
 			JOptionPane.showMessageDialog(null, "Rossz bemenet", "LaTeX", 1);
 		}
-		TeXIcon ti = formula.createTeXIcon(TeXConstants.STYLE_DISPLAY, 20);
+		TeXIcon ti = formula.createTeXIcon(TeXConstants.STYLE_DISPLAY, 30);
 		BufferedImage b = new BufferedImage(ti.getIconWidth(), ti.getIconHeight(), BufferedImage.TYPE_4BYTE_ABGR);
 		ti.paintIcon(new JLabel(), b.getGraphics(), 0, 0);
 		
@@ -153,7 +153,7 @@ public class Controller {
 		dialog.addWindowListener(new java.awt.event.WindowAdapter() {
 		    @Override
 		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-				dialog.setHelpDialogCreated(false);
+				HelpDialog.setHelpDialogCreated(false);
 		    }
 		});
 	}
@@ -199,7 +199,6 @@ public class Controller {
 		for (int i = 0; i < panels.length; i++) {
 			if (panels[i].getChkBox().isSelected() == true) {
 				imgCount ++;
-				checkedEditables++;
 			}
 		}
 		return imgCount;
@@ -364,7 +363,7 @@ public class Controller {
 					isFileExists = new File(file +"_akcio_nyomda.pdf").exists();
 					
 					BufferedImage[] bufferedActions = createAndFillSelectedActions();
-					BufferedImage[] bufferedTreasures = createAndFillSelectedBlues();
+					//BufferedImage[] bufferedTreasures = createAndFillSelectedBlues();
 					//already existing name of a file YES/NO option of replacing
 					if (isFileExists && returnVal == JFileChooser.APPROVE_OPTION && file != null){
 						chosen = JOptionPane.showConfirmDialog(EditableFrame.getMyEditableFrame(), "Ilyen nevű fájl már léteszik. Szeretnéd felülírni?","Figyelem!", JOptionPane.YES_NO_OPTION);
@@ -372,15 +371,15 @@ public class Controller {
 							fc.approveSelection(); //Accept replacement
 							numberOfFile = 0;
 							if (NoneditableFrame.getSumAction() > 0) { //action prints
-								com.itextpdf.text.Image[] actions = bufferedArrayToImage(bufferedActions); 
-								FileManager.writePdfPrint(actions, file + "_akcio_nyomda");
+								com.itextpdf.text.Image[] actionCards = bufferedArrayToImage(bufferedActions); 
+								FileManager.writePdfPrint(actionCards, file + "_akcio_nyomda");
 								numberOfFile++;
 							}
-							if (NoneditableFrame.getSumBlue() > 0) { //challenge prints
+							/*if (NoneditableFrame.getSumBlue() > 0) { //challenge prints
 								com.itextpdf.text.Image[] treasures = bufferedArrayToImage(bufferedTreasures); 
 								FileManager.writePdfPrint(treasures, file + "_szerencseproba_nyomda");
 								numberOfFile++;
-							}
+							} */
 							JOptionPane.showMessageDialog(EditableFrame.getMyEditableFrame(), "Sikeres mentés!\n Létrehozott fájl(ok) száma: " + numberOfFile, "Utóirat", 1);
 						}
 					}
@@ -394,11 +393,11 @@ public class Controller {
 							FileManager.writePdfPrint(actions, file + "_akcio_nyomda");
 							numberOfFile++;
 						}
-						if (NoneditableFrame.getSumBlue() > 0) {
+						/*if (NoneditableFrame.getSumBlue() > 0) {
 							com.itextpdf.text.Image[] treasures = bufferedArrayToImage(bufferedTreasures); 
 							FileManager.writePdfPrint(treasures, file + "_szerencseproba_nyomda");
 							numberOfFile++;
-						}
+						}*/
 						JOptionPane.showMessageDialog(EditableFrame.getMyEditableFrame(), "Sikeres mentés!\n Létrehozott fájl(ok) száma: " + numberOfFile, "Utóirat", 1);
 					}
 				}
@@ -425,7 +424,7 @@ public class Controller {
 		com.itextpdf.text.Image[] outputs = new com.itextpdf.text.Image[filledInputs];
 		try {
 			for (int i = 0; i < filledInputs; i++) {
-				outputs[i] = com.itextpdf.text.Image.getInstance(inputs[i], null);
+				outputs[i] = com.itextpdf.text.Image.getInstance(inputs[i].getScaledInstance(675, 1050, Image.SCALE_SMOOTH), null);
 			}
 		} catch (BadElementException bee) {
 			bee.getMessage();
